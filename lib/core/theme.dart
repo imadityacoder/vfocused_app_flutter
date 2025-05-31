@@ -12,7 +12,7 @@ class AppTheme {
         fontFamily: 'Orbitron',
         fontSize: 36,
         fontWeight: FontWeight.bold,
-        color: AppColors.neonPurple,
+        color: Colors.white,
       ),
       titleLarge: TextStyle(
         fontFamily: 'SpaceGrotesk',
@@ -30,7 +30,7 @@ class AppTheme {
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.neonPurple,
+        backgroundColor: Colors.white,
         foregroundColor: AppColors.buttonText,
         textStyle: const TextStyle(fontWeight: FontWeight.bold),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
@@ -50,7 +50,7 @@ class AppTheme {
     cardColor: AppColors.card,
     iconTheme: const IconThemeData(color: AppColors.neonPurple),
     colorScheme: ColorScheme.dark(
-      primary: AppColors.neonPurple,
+      primary: Colors.white,
       secondary: AppColors.neonBlue,
       surface: AppColors.background,
       onPrimary: AppColors.buttonText,

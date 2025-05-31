@@ -86,7 +86,7 @@ class _FocusTimerState extends State<FocusTimer> {
                 innerWidget: (value) {
                   return Center(
                     child: Text(
-                      '${value.toInt()}',
+                      '${value.toInt()} min',
                       style: const TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class _FocusTimerState extends State<FocusTimer> {
         const SizedBox(height: 20),
         // Play / Pause Button
         SizedBox(
-          height: 140,
+          height: 120,
           child: IconButton(
             onPressed: _isRunning ? null : _startTimer,
             iconSize: 80,
@@ -158,7 +158,10 @@ class _FocusTimerState extends State<FocusTimer> {
         ),
         TextButton(
           onPressed: _resetTimer,
-          child: const Text('Reset', style: TextStyle(color: Colors.white54)),
+          child: const Text(
+            'Reset',
+            style: TextStyle(color: AppColors.textSecondary),
+          ),
         ),
       ],
     );

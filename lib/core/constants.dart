@@ -2,21 +2,46 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Backgrounds
-  static const Color background = Color(0xFF1E1E2C); // Deep dark purple
+  static const Color background = Color.fromARGB(
+    255,
+    6,
+    0,
+    20,
+  ); // Deep dark purple
   static const Color card = Color(0xFF2A2A40); // Slightly lighter for cards
 
   // Neon Accents
-  static const Color neonPurple = Color(0xFFB980F0); // Neon purple accent
-  static const Color neonBlue = Color(0xFF7DF9FF); // Cyan-blue glow
-  static const Color neonGreen = Color(0xFF39FF14); // Matrix green
-  static const Color neonPink = Color(0xFFFF4DDC); // Optional neon pink
+  static const Color neonPurple = Color.fromARGB(
+    255,
+    177,
+    93,
+    255,
+  ); // Neon purple accent
+  static const Color neonBlue = Color.fromARGB(
+    255,
+    85,
+    130,
+    255,
+  ); // Cyan-blue glow
+  static const Color neonGreen = Color.fromARGB(
+    255,
+    75,
+    243,
+    9,
+  ); // Matrix green
+  static const Color neonPink = Color.fromARGB(
+    255,
+    255,
+    80,
+    220,
+  ); // Optional neon pink
 
   // Text Colors
   static const Color textPrimary = Colors.white;
   static const Color textSecondary = Colors.white70;
 
   // Button Colors
-  static const Color button = neonPurple;
+  static const Color button = Color.fromARGB(255, 162, 68, 250);
   static const Color buttonText = Colors.black;
 
   // Focus Timer Ring (Optional)

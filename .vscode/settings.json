@@ -3,5 +3,6 @@
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit"
     },
-    "files.autoSave": "onFocusChange"
+    "files.autoSave": "onFocusChange",
+    "editor.fontFamily": "'JetBrains Mono', 'Victor Mono', monospace"
 }

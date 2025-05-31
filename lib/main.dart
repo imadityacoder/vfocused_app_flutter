@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vfocused_app/pages/home/home_page.dart';
+import 'package:vfocused_app/routes/app_routes.dart';
 import 'core/theme.dart';
 
 void main() {
-  runApp(ProviderScope(child: const MyApp()));
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       title: 'v_focused',
       theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      initialRoute: AppRoutes.landing,
+      onGenerateRoute: AppRoutes.generateRoute,
     );
   }
 }
