@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vfocused_app/pages/home/home_page.dart';
 import 'package:vfocused_app/pages/landing/landing_page.dart';
-import 'package:vfocused_app/pages/settings/settings_page.dart';
 import 'package:vfocused_app/pages/tasks/tasks_page.dart';
 
 /// AppRoutes class containing all route names and route generation logic

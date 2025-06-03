@@ -17,7 +17,7 @@ class HomePage extends ConsumerWidget {
         elevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               "Focused Today: 40min",
               style: TextStyle(
@@ -45,10 +45,10 @@ class HomePage extends ConsumerWidget {
                 // Title Text
                 const Text(
                   "Pomodoro Timer",
-                  style: TextStyle(fontSize: 30, color: AppColors.textPrimary),
+                  style: TextStyle(fontSize: 32, color: AppColors.textPrimary),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
 
                 // Timer Widget
                 const FocusTimer(),

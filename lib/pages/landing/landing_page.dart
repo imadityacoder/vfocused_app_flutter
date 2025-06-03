@@ -46,11 +46,7 @@ class LandingPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AppRoutes.home,
-                  (route) => false,
-                );
+                Navigator.pushReplacementNamed(context, AppRoutes.home);
               },
               style: ButtonStyle(
                 shape: WidgetStatePropertyAll(

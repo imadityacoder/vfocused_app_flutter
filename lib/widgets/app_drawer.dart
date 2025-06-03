@@ -101,7 +101,7 @@ class AppDrawer extends StatelessWidget {
           () {
             Navigator.pop(context);
             if (route != null) {
-              Navigator.pushReplacementNamed(context, route);
+              Navigator.pushNamed(context, route);
             }
           },
     );
