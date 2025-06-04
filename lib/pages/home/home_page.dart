@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vfocused_app/core/constants.dart';
+import 'package:vfocused_app/providers/pomodoro_provider.dart';
 import 'package:vfocused_app/widgets/app_drawer.dart';
 import 'package:vfocused_app/widgets/focus_timer.dart';
 
@@ -9,6 +10,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final focusedToday = ref.watch(pomodoroProvider.notifier).focusedToday();
     return Scaffold(
       backgroundColor: AppColors.background,
       drawer: const AppDrawer(),
@@ -17,9 +19,9 @@ class HomePage extends ConsumerWidget {
         elevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.only(right: 16.0),
             child: Text(
-              "Focused Today: 40min",
+              "Focused Today: ${focusedToday}min",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -39,9 +41,6 @@ class HomePage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Top Stats
-                const SizedBox(height: 40),
-
                 // Title Text
                 const Text(
                   "Pomodoro Timer",

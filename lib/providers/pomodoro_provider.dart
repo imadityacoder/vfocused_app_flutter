@@ -84,6 +84,11 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
     state = state.copyWith(focusDuration: newDuration, remaining: newDuration);
   }
 
+  int focusedToday() {
+    final total = state.completedCycles * state.focusDuration.inMinutes;
+    return total;
+  }
+
   Duration _currentSessionDuration() {
     switch (state.session) {
       case PomodoroSession.focus:

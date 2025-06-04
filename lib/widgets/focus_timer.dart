@@ -92,10 +92,10 @@ class FocusTimer extends ConsumerWidget {
                   ),
                 ),
               ),
-            SizedBox(
-              height: 120,
-              child: Positioned(
-                top: 60,
+            Positioned(
+              top: 70,
+              child: SizedBox(
+                height: 140,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

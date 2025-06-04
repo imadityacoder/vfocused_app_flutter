@@ -15,26 +15,18 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: AppColors.background),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const CircleAvatar(
-                  radius: 40,
-                  backgroundColor: AppColors.neonBlue,
-                  child: Icon(Icons.person, size: 30, color: Colors.white),
+          const SizedBox(
+            height: 120,
+            child: Center(
+              child: Text(
+                'VFocused',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontFamily: 'Orbitron',
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  'Aditya K',
-                  style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
           _buildDrawerItem(
@@ -94,7 +86,7 @@ class AppDrawer extends StatelessWidget {
     VoidCallback? onTap,
   }) {
     return ListTile(
-      leading: Icon(icon, color: AppColors.neonPurple),
+      leading: Icon(icon, color: Colors.white),
       title: Text(title, style: TextStyle(color: AppColors.textPrimary)),
       onTap:
           onTap ??
