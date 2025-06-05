@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:vfocused_app/core/constants.dart';
 import 'package:vfocused_app/routes/app_routes.dart';
 
@@ -15,17 +16,30 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const SizedBox(
-            height: 120,
-            child: Center(
-              child: Text(
-                'VFocused',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontFamily: 'Orbitron',
-                ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
+            child: SizedBox(
+              height: 80,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'VFocused',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontFamily: 'Orbitron',
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: Icon(Icons.close_rounded),
+                  ),
+                ],
               ),
             ),
           ),
@@ -45,13 +59,7 @@ class AppDrawer extends StatelessWidget {
             context: context,
             icon: Icons.analytics,
             title: 'Statistics',
-            onTap: () {
-              // TODO: Implement statistics page
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Statistics coming soon!')),
-              );
-            },
+            route: AppRoutes.statistics,
           ),
 
           _buildDrawerItem(
@@ -64,13 +72,7 @@ class AppDrawer extends StatelessWidget {
             context: context,
             icon: Icons.help_outline,
             title: 'Help & Feedback',
-            onTap: () {
-              // TODO: Implement help page
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Help page coming soon!')),
-              );
-            },
+            route: AppRoutes.helpFeedback,
           ),
         ],
       ),

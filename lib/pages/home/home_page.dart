@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vfocused_app/core/constants.dart';
 import 'package:vfocused_app/providers/pomodoro_provider.dart';
 import 'package:vfocused_app/widgets/app_drawer.dart';
@@ -13,10 +14,28 @@ class HomePage extends ConsumerWidget {
     final focusedToday = ref.watch(focusedTodayProvider);
     return Scaffold(
       backgroundColor: AppColors.background,
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(),
       appBar: AppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
+        leading: Builder(
+          builder:
+              (context) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                  onTap: () {
+                    if (Scaffold.of(context).hasDrawer) {
+                      Scaffold.of(context).openDrawer();
+                    } else {
+                      print("No drawer found.");
+                    }
+                  },
+                  radius: 30,
+                  child: SvgPicture.asset('assets/icons/Menu.svg'),
+                ),
+              ),
+        ),
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),

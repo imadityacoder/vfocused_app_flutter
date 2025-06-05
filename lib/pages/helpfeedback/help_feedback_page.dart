@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:vfocused_app/core/constants.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class HelpFeedbackPage extends StatelessWidget {
+  const HelpFeedbackPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text('My Help & Feedback'),
         backgroundColor: AppColors.background,
         elevation: 0,
       ),
@@ -17,10 +17,14 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.settings, size: 80, color: AppColors.neonPurple),
+            const Icon(
+              Icons.feedback_rounded,
+              size: 80,
+              color: AppColors.neonPurple,
+            ),
             const SizedBox(height: 20),
             Text(
-              'Settings Coming Soon',
+              'Feedback Coming Soon',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -29,7 +33,7 @@ class SettingsPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Customize your settings and productivity',
+              'Give your Feedback and productivity',
               style: TextStyle(fontSize: 16, color: AppColors.textSecondary),
             ),
           ],

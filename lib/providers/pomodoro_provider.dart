@@ -89,9 +89,9 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
       case PomodoroSession.focus:
         return state.focusDuration;
       case PomodoroSession.shortBreak:
-        return const Duration(minutes: 5);
+        return const Duration(minutes: 1);
       case PomodoroSession.longBreak:
-        return const Duration(minutes: 15);
+        return const Duration(minutes: 1);
     }
   }
 
@@ -138,12 +138,12 @@ final pomodoroProvider = StateNotifierProvider<PomodoroNotifier, PomodoroState>(
 );
 
 final focusedTodayProvider = Provider<int>((ref) {
+  int focusedToday = 0;
   final state = ref.watch(
     pomodoroProvider,
   ); // or your actual StateNotifierProvider
   if (state.session == PomodoroSession.focus) {
-    return state.completedCycles * state.focusDuration.inMinutes;
+    focusedToday = state.completedCycles * state.focusDuration.inMinutes;
   }
-
-  return 0;
+  return focusedToday;
 });

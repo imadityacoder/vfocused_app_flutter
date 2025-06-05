@@ -48,7 +48,7 @@ class AppTheme {
     ),
 
     cardColor: AppColors.card,
-    iconTheme: const IconThemeData(color: AppColors.neonPurple),
+    iconTheme: const IconThemeData(color: Colors.white),
     colorScheme: ColorScheme.dark(
       primary: Colors.white,
       secondary: AppColors.neonBlue,

@@ -16,6 +16,7 @@ dependencies:
   
   flutter_riverpod: ^2.6.1
   sleek_circular_slider: ^2.1.0
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +29,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
 
   fonts:
     - family: Orbitron
