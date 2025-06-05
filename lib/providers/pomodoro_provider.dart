@@ -84,11 +84,6 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
     state = state.copyWith(focusDuration: newDuration, remaining: newDuration);
   }
 
-  int focusedToday() {
-    final total = state.completedCycles * state.focusDuration.inMinutes;
-    return total;
-  }
-
   Duration _currentSessionDuration() {
     switch (state.session) {
       case PomodoroSession.focus:
@@ -113,8 +108,8 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
                   : PomodoroSession.shortBreak,
           remaining:
               isLongBreak
-                  ? const Duration(minutes: 15)
-                  : const Duration(minutes: 5),
+                  ? const Duration(minutes: 1)
+                  : const Duration(minutes: 1),
           isRunning: false,
           completedCycles: newCycles,
         );
@@ -141,3 +136,14 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
 final pomodoroProvider = StateNotifierProvider<PomodoroNotifier, PomodoroState>(
   (ref) => PomodoroNotifier(),
 );
+
+final focusedTodayProvider = Provider<int>((ref) {
+  final state = ref.watch(
+    pomodoroProvider,
+  ); // or your actual StateNotifierProvider
+  if (state.session == PomodoroSession.focus) {
+    return state.completedCycles * state.focusDuration.inMinutes;
+  }
+
+  return 0;
+});

@@ -10,7 +10,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final focusedToday = ref.watch(pomodoroProvider.notifier).focusedToday();
+    final focusedToday = ref.watch(focusedTodayProvider);
     return Scaffold(
       backgroundColor: AppColors.background,
       drawer: const AppDrawer(),

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'v_focused',
       theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.landing,
+      initialRoute: AppRoutes.home,
       onGenerateRoute: AppRoutes.generateRoute,
     );
   }

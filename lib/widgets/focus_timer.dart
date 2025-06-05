@@ -38,60 +38,16 @@ class FocusTimer extends ConsumerWidget {
           alignment: Alignment.center,
           children: [
             SizedBox(
-              width: 280,
-              height: 280,
+              width: 290,
+              height: 290,
               child: CircularProgressIndicator(
                 value: progress,
-                strokeWidth: 18,
+                strokeWidth: 20,
                 year2023: false,
                 backgroundColor: Colors.grey.shade900,
                 valueColor: const AlwaysStoppedAnimation(AppColors.neonGreen),
               ),
             ),
-            if (!state.isRunning && state.session == PomodoroSession.focus)
-              SleekCircularSlider(
-                initialValue: state.focusDuration.inMinutes.toDouble(),
-                max: 120,
-                min: 1,
-                onChange: (value) => notifier.setFocusDuration(value.toInt()),
-                innerWidget:
-                    (value) => Center(
-                      child: Text(
-                        '${value.toInt()} min',
-                        style: const TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                appearance: CircularSliderAppearance(
-                  angleRange: 360,
-                  startAngle: -90,
-                  customColors: CustomSliderColors(
-                    dotColor: AppColors.neonBlue,
-                    progressBarColor: AppColors.neonBlue,
-                    trackColor: Colors.grey.shade900,
-                  ),
-                  size: 220,
-                  customWidths: CustomSliderWidths(
-                    progressBarWidth: 18,
-                    trackWidth: 14,
-                    handlerSize: 20,
-                  ),
-                ),
-              )
-            else
-              Center(
-                child: Text(
-                  formatTime(state.remaining),
-                  style: const TextStyle(
-                    fontSize: 48,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
             Positioned(
               top: 70,
               child: SizedBox(
@@ -119,6 +75,61 @@ class FocusTimer extends ConsumerWidget {
                 ),
               ),
             ),
+            if (!state.isRunning && state.session == PomodoroSession.focus)
+              SizedBox(
+                height: 220,
+                width: 220,
+                child: SleekCircularSlider(
+                  initialValue: state.focusDuration.inMinutes.toDouble(),
+                  min: 10,
+                  max: 60,
+                  onChange: (value) {
+                    // Snap to nearest 5-minute step
+                    final steppedValue = (value / 5).round() * 5;
+                    notifier.setFocusDuration(steppedValue);
+                  },
+                  innerWidget: (value) {
+                    final steppedValue = (value / 5).round() * 5;
+                    return Center(
+                      child: Text(
+                        '$steppedValue min',
+                        style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+                  },
+                  appearance: CircularSliderAppearance(
+                    angleRange: 360,
+                    startAngle:
+                        270, // -90 is risky; 270 is equivalent and valid
+                    size: 220,
+                    customColors: CustomSliderColors(
+                      dotColor: AppColors.neonBlue,
+                      progressBarColor: AppColors.neonBlue,
+                      trackColor: Colors.grey.shade900,
+                    ),
+                    customWidths: CustomSliderWidths(
+                      progressBarWidth: 18,
+                      trackWidth: 14,
+                      handlerSize: 16,
+                    ),
+                  ),
+                ),
+              )
+            else
+              Center(
+                child: Text(
+                  formatTime(state.remaining),
+                  style: const TextStyle(
+                    fontSize: 48,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
           ],
         ),
         const SizedBox(height: 30),
