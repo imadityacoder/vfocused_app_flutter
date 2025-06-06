@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Backgrounds
-  static const Color background = Color.fromARGB(
-    255,
-    7,
-    1,
-    27,
-  ); // Deep dark purple
+  static const Color background = Color.fromARGB(255, 1, 9, 24);
   static const Color card = Color(0xFF2A2A40); // Slightly lighter for cards
 
   // Neon Accents

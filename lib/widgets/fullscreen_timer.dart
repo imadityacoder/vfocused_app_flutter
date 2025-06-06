@@ -1,0 +1,119 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vfocused_app/core/constants.dart';
+import 'package:vfocused_app/providers/pomodoro_provider.dart';
+
+class FullscreenPomodoroClock extends ConsumerStatefulWidget {
+  const FullscreenPomodoroClock({super.key});
+
+  @override
+  ConsumerState<FullscreenPomodoroClock> createState() =>
+      _FullscreenPomodoroClockState();
+}
+
+class _FullscreenPomodoroClockState
+    extends ConsumerState<FullscreenPomodoroClock> {
+  @override
+  void initState() {
+    super.initState();
+    // Lock to landscape mode only
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
+
+  @override
+  /*************  ✨ Windsurf Command ⭐  *************/
+  /// Disposes of the widget's resources and resets the device orientation
+  /// to allow portrait modes when exiting the fullscreen timer.
+  /// *****  9adb3a13-47db-4c72-85df-ea7db4cada86  ******
+  void dispose() {
+    // Reset orientation to allow all when exiting
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
+  String formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final minutes = twoDigits(duration.inMinutes.remainder(60));
+    final seconds = twoDigits(duration.inSeconds.remainder(60));
+    return '$minutes:$seconds';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final pomodoroState = ref.watch(pomodoroProvider);
+    final pomodoroNotifier = ref.read(pomodoroProvider.notifier);
+
+    final sessionLabel =
+        pomodoroState.session == PomodoroSession.focus
+            ? 'FOCUS'
+            : pomodoroState.session == PomodoroSession.shortBreak
+            ? 'SHORT BREAK'
+            : 'LONG BREAK';
+
+    final timeRemaining = formatDuration(pomodoroState.remaining);
+    final icon =
+        pomodoroState.isRunning ? Icons.pause_circle : Icons.play_circle;
+
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                sessionLabel,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
+                  letterSpacing: 2,
+                ),
+              ),
+              Text(
+                timeRemaining,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height / 2.3,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    iconSize: 40,
+                    splashRadius: 50,
+                    icon: Icon(icon, color: AppColors.button),
+                    onPressed: () {
+                      pomodoroState.isRunning
+                          ? pomodoroNotifier.pause()
+                          : pomodoroNotifier.start();
+                    },
+                  ),
+                  IconButton(
+                    iconSize: 40,
+                    splashRadius: 50,
+                    icon: const Icon(
+                      Icons.exit_to_app_rounded,
+                      color: AppColors.neonBlue,
+                    ),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

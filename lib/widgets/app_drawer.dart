@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:vfocused_app/core/constants.dart';
 import 'package:vfocused_app/routes/app_routes.dart';
 

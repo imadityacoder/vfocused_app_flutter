@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vfocused_app/services/sound_service.dart';
 
 enum PomodoroSession { focus, shortBreak, longBreak }
 
@@ -48,10 +49,10 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
       );
 
   Timer? _timer;
+  int _lastCompletedCycle = 0;
 
   void start() {
     _timer?.cancel();
-
     state = state.copyWith(isRunning: true);
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -89,16 +90,23 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
       case PomodoroSession.focus:
         return state.focusDuration;
       case PomodoroSession.shortBreak:
-        return const Duration(minutes: 1);
+        return const Duration(minutes: 5);
       case PomodoroSession.longBreak:
-        return const Duration(minutes: 1);
+        return const Duration(minutes: 15);
     }
   }
 
   void _nextSession() {
     switch (state.session) {
       case PomodoroSession.focus:
+        SoundService.playCycleCompleteSound();
         int newCycles = state.completedCycles + 1;
+
+        // play sound on cycle complete
+        if (newCycles > _lastCompletedCycle) {
+          _lastCompletedCycle = newCycles;
+        }
+
         bool isLongBreak = newCycles % 4 == 0;
 
         state = state.copyWith(
@@ -138,12 +146,11 @@ final pomodoroProvider = StateNotifierProvider<PomodoroNotifier, PomodoroState>(
 );
 
 final focusedTodayProvider = Provider<int>((ref) {
-  int focusedToday = 0;
-  final state = ref.watch(
-    pomodoroProvider,
-  ); // or your actual StateNotifierProvider
-  if (state.session == PomodoroSession.focus) {
-    focusedToday = state.completedCycles * state.focusDuration.inMinutes;
-  }
-  return focusedToday;
+  final state = ref.watch(pomodoroProvider);
+
+  // Calculate total focused minutes from completed cycles
+  final totalFocusedMinutes =
+      state.completedCycles * state.focusDuration.inMinutes;
+
+  return totalFocusedMinutes;
 });

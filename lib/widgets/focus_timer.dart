@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:vfocused_app/core/constants.dart';
 import 'package:vfocused_app/providers/pomodoro_provider.dart';
+import 'package:vfocused_app/routes/app_routes.dart';
 
 class FocusTimer extends ConsumerWidget {
   const FocusTimer({super.key});
@@ -94,7 +95,7 @@ class FocusTimer extends ConsumerWidget {
                         child: SleekCircularSlider(
                           initialValue:
                               state.focusDuration.inMinutes.toDouble(),
-                          min: 5,
+                          min: 10,
                           max: 60,
                           onChange: (value) {
                             final steppedValue = (value / 5).round() * 5;
@@ -168,16 +169,29 @@ class FocusTimer extends ConsumerWidget {
               ),
             ),
 
-            if (!state.isRunning)
-              IconButton(
-                iconSize: 40,
-                splashRadius: 90,
-                onPressed: notifier.reset,
-                icon: const Icon(
-                  Icons.replay_circle_filled_rounded,
-                  color: AppColors.neonBlue,
+            state.isRunning
+                ? IconButton(
+                  iconSize: 40,
+                  splashRadius: 90,
+                  onPressed:
+                      () => Navigator.pushNamed(
+                        context,
+                        AppRoutes.fullscreenTimer,
+                      ),
+                  icon: const Icon(
+                    Icons.fullscreen_rounded,
+                    color: AppColors.neonBlue,
+                  ),
+                )
+                : IconButton(
+                  iconSize: 40,
+                  splashRadius: 90,
+                  onPressed: notifier.reset,
+                  icon: const Icon(
+                    Icons.replay_circle_filled_rounded,
+                    color: AppColors.neonBlue,
+                  ),
                 ),
-              ),
           ],
         ),
       ],
