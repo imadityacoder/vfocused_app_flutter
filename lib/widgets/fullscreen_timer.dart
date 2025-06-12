@@ -25,12 +25,7 @@ class _FullscreenPomodoroClockState
   }
 
   @override
-  /*************  ✨ Windsurf Command ⭐  *************/
-  /// Disposes of the widget's resources and resets the device orientation
-  /// to allow portrait modes when exiting the fullscreen timer.
-  /// *****  9adb3a13-47db-4c72-85df-ea7db4cada86  ******
   void dispose() {
-    // Reset orientation to allow all when exiting
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -72,22 +67,26 @@ class _FullscreenPomodoroClockState
                 sessionLabel,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 26,
-                  letterSpacing: 2,
+                  fontSize: 24,
+                  letterSpacing: 1.5,
                 ),
               ),
-              Text(
-                timeRemaining,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height / 2.3,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  timeRemaining,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height / 2.4,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
                     iconSize: 40,

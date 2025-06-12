@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vfocused_app/services/notification_service.dart';
 import 'package:vfocused_app/services/sound_service.dart';
 
 enum PomodoroSession { focus, shortBreak, longBreak }
@@ -36,6 +37,9 @@ class PomodoroState {
   }
 }
 
+const shortBreakDuration = 5;
+const longBreakDuration = 15;
+
 class PomodoroNotifier extends StateNotifier<PomodoroState> {
   PomodoroNotifier()
     : super(
@@ -55,13 +59,22 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
     _timer?.cancel();
     state = state.copyWith(isRunning: true);
 
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    final totalDuration = _currentSessionDuration();
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       if (state.remaining.inSeconds <= 1) {
         timer.cancel();
+        await cancelPomodoroNotification(); // stop progress bar
         _nextSession();
       } else {
-        state = state.copyWith(
-          remaining: state.remaining - const Duration(seconds: 1),
+        final newRemaining = state.remaining - const Duration(seconds: 1);
+
+        state = state.copyWith(remaining: newRemaining);
+
+        await showPomodoroProgressNotification(
+          sessionLabel: _sessionLabel(state.session),
+          remaining: newRemaining,
+          total: totalDuration,
         );
       }
     });
@@ -72,12 +85,13 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
     state = state.copyWith(isRunning: false);
   }
 
-  void reset() {
+  void reset() async {
     _timer?.cancel();
     state = state.copyWith(
       isRunning: false,
       remaining: _currentSessionDuration(),
     );
+    await cancelPomodoroNotification();
   }
 
   void setFocusDuration(int minutes) {
@@ -90,16 +104,17 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
       case PomodoroSession.focus:
         return state.focusDuration;
       case PomodoroSession.shortBreak:
-        return const Duration(minutes: 5);
+        return const Duration(minutes: shortBreakDuration);
       case PomodoroSession.longBreak:
-        return const Duration(minutes: 15);
+        return const Duration(minutes: longBreakDuration);
     }
   }
 
-  void _nextSession() {
+  void _nextSession() async {
     switch (state.session) {
       case PomodoroSession.focus:
         SoundService.playCycleCompleteSound();
+        await showSessionDoneNotification("Time for a break!");
         int newCycles = state.completedCycles + 1;
 
         // play sound on cycle complete
@@ -125,6 +140,8 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
 
       case PomodoroSession.shortBreak:
       case PomodoroSession.longBreak:
+        SoundService.playCycleBreakSound();
+        await showSessionDoneNotification("Back to Focus!");
         state = state.copyWith(
           session: PomodoroSession.focus,
           remaining: state.focusDuration,
@@ -154,3 +171,14 @@ final focusedTodayProvider = Provider<int>((ref) {
 
   return totalFocusedMinutes;
 });
+
+String _sessionLabel(PomodoroSession session) {
+  switch (session) {
+    case PomodoroSession.focus:
+      return "Focus";
+    case PomodoroSession.shortBreak:
+      return "Short Break";
+    case PomodoroSession.longBreak:
+      return "Long Break";
+  }
+}

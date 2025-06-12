@@ -18,6 +18,7 @@ dependencies:
   sleek_circular_slider: ^2.1.0
   flutter_svg: ^2.1.0
   audioplayers: ^6.4.0
+  flutter_local_notifications: ^19.2.1
 
 dev_dependencies:
   flutter_test:
@@ -31,7 +32,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/sounds/ding.mp3
+    - assets/sounds/ding1.mp3
+    - assets/sounds/ding2.mp3
 
   fonts:
     - family: Orbitron

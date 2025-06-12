@@ -95,7 +95,7 @@ class FocusTimer extends ConsumerWidget {
                         child: SleekCircularSlider(
                           initialValue:
                               state.focusDuration.inMinutes.toDouble(),
-                          min: 10,
+                          min: 5,
                           max: 60,
                           onChange: (value) {
                             final steppedValue = (value / 5).round() * 5;

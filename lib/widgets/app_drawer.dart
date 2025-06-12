@@ -48,12 +48,7 @@ class AppDrawer extends StatelessWidget {
             title: 'Pomodoro Timer',
             route: AppRoutes.home,
           ),
-          _buildDrawerItem(
-            context: context,
-            icon: Icons.task_alt,
-            title: 'Tasks',
-            route: AppRoutes.tasks,
-          ),
+
           _buildDrawerItem(
             context: context,
             icon: Icons.analytics,

@@ -3,7 +3,6 @@ import 'package:vfocused_app/pages/home/home_page.dart';
 import 'package:vfocused_app/pages/landing/landing_page.dart';
 import 'package:vfocused_app/pages/settings/settings_page.dart';
 import 'package:vfocused_app/pages/statistics/statistics_page.dart';
-import 'package:vfocused_app/pages/tasks/tasks_page.dart';
 import 'package:vfocused_app/widgets/fullscreen_timer.dart';
 
 /// AppRoutes class containing all route names and route generation logic
@@ -11,7 +10,6 @@ class AppRoutes {
   /// Route constants
   static const String landing = '/';
   static const String home = '/home';
-  static const String tasks = '/tasks';
   static const String settings = '/settings';
   static const String statistics = '/statistics';
   static const String helpFeedback = '/help-feedback';
@@ -24,8 +22,6 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const LandingPage());
       case home:
         return MaterialPageRoute(builder: (_) => const HomePage());
-      case tasks:
-        return MaterialPageRoute(builder: (_) => const TasksPage());
       case settings:
         return MaterialPageRoute(builder: (_) => const SettingsPage());
       case statistics:
