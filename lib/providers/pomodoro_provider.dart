@@ -131,8 +131,8 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
                   : PomodoroSession.shortBreak,
           remaining:
               isLongBreak
-                  ? const Duration(minutes: 1)
-                  : const Duration(minutes: 1),
+                  ? const Duration(minutes: longBreakDuration)
+                  : const Duration(minutes: shortBreakDuration),
           isRunning: false,
           completedCycles: newCycles,
         );
