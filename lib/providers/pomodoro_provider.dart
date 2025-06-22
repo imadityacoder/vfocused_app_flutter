@@ -113,9 +113,9 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
   void _nextSession() async {
     switch (state.session) {
       case PomodoroSession.focus:
+        int newCycles = state.completedCycles + 1;
         SoundService.playCycleCompleteSound();
         await showSessionDoneNotification("Time for a break!");
-        int newCycles = state.completedCycles + 1;
 
         // play sound on cycle complete
         if (newCycles > _lastCompletedCycle) {
@@ -140,13 +140,13 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
 
       case PomodoroSession.shortBreak:
       case PomodoroSession.longBreak:
-        SoundService.playCycleBreakSound();
-        await showSessionDoneNotification("Back to Focus!");
         state = state.copyWith(
           session: PomodoroSession.focus,
           remaining: state.focusDuration,
           isRunning: false,
         );
+        SoundService.playCycleBreakSound();
+        await showSessionDoneNotification("Back to Focus!");
         break;
     }
   }

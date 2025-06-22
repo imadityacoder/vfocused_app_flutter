@@ -16,6 +16,7 @@ class _FullscreenPomodoroClockState
     extends ConsumerState<FullscreenPomodoroClock> {
   @override
   void initState() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     super.initState();
     // Lock to landscape mode only
     SystemChrome.setPreferredOrientations([
@@ -26,6 +27,7 @@ class _FullscreenPomodoroClockState
 
   @override
   void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -67,7 +69,7 @@ class _FullscreenPomodoroClockState
                 sessionLabel,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 28,
                   letterSpacing: 1.5,
                 ),
               ),
@@ -77,7 +79,7 @@ class _FullscreenPomodoroClockState
                   timeRemaining,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height / 2.4,
+                    fontSize: MediaQuery.of(context).size.height * 0.5,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -102,7 +104,7 @@ class _FullscreenPomodoroClockState
                     iconSize: 40,
                     splashRadius: 50,
                     icon: const Icon(
-                      Icons.exit_to_app_rounded,
+                      Icons.fullscreen_exit_rounded,
                       color: AppColors.neonBlue,
                     ),
                     onPressed: () => Navigator.pop(context),

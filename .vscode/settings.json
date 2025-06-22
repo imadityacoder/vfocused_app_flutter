@@ -4,5 +4,6 @@
         "source.fixAll": "explicit"
     },
     "files.autoSave": "onFocusChange",
-    "editor.fontFamily": "'JetBrains Mono', 'Victor Mono', monospace"
+    "editor.fontFamily": "'JetBrains Mono', 'Victor Mono', monospace",
+    "editor.fontSize": 16
 }

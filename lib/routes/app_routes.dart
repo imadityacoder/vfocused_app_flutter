@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vfocused_app/pages/home/home_page.dart';
 import 'package:vfocused_app/pages/landing/landing_page.dart';
+import 'package:vfocused_app/pages/landing/splash_page.dart';
 import 'package:vfocused_app/pages/settings/settings_page.dart';
 import 'package:vfocused_app/pages/statistics/statistics_page.dart';
 import 'package:vfocused_app/widgets/fullscreen_timer.dart';
@@ -8,7 +9,8 @@ import 'package:vfocused_app/widgets/fullscreen_timer.dart';
 /// AppRoutes class containing all route names and route generation logic
 class AppRoutes {
   /// Route constants
-  static const String landing = '/';
+  static const String splash = '/';
+  static const String landing = '/landing';
   static const String home = '/home';
   static const String settings = '/settings';
   static const String statistics = '/statistics';
@@ -18,8 +20,10 @@ class AppRoutes {
   /// Route generator method
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case splash:
+        return MaterialPageRoute(builder: (_) => SplashPage());
       case landing:
-        return MaterialPageRoute(builder: (_) => const LandingPage());
+        return MaterialPageRoute(builder: (_) => LandingPage());
       case home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       case settings:

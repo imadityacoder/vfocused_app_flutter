@@ -51,6 +51,12 @@ class AppDrawer extends StatelessWidget {
 
           _buildDrawerItem(
             context: context,
+            icon: Icons.screen_lock_landscape_rounded,
+            title: 'FullScreen Mode',
+            route: AppRoutes.fullscreenTimer,
+          ),
+          _buildDrawerItem(
+            context: context,
             icon: Icons.analytics,
             title: 'Statistics',
             route: AppRoutes.statistics,
