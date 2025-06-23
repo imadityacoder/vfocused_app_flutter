@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Backgrounds
   static const Color background = Color.fromARGB(255, 1, 9, 24);
-  static const Color card = Color(0xFF2A2A40); // Slightly lighter for cards
+  static const Color card = Color.fromARGB(
+    255,
+    13,
+    0,
+    31,
+  ); // Slightly lighter for cards
 
   // Neon Accents
   static const Color neonPurple = Color.fromARGB(
@@ -17,7 +22,7 @@ class AppColors {
     85,
     130,
     255,
-  ); // Cyan-blue glow
+  ); // Cya-blue glow
   static const Color neonGreen = Color.fromARGB(
     255,
     75,

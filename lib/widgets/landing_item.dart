@@ -23,7 +23,7 @@ class LandingItem extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      color: Colors.black,
+      color: AppColors.card,
       width: double.infinity,
       child: Center(
         child: Column(
@@ -59,8 +59,8 @@ class LandingItem extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  // final prefs = await SharedPreferences.getInstance();
-                  // await prefs.setBool('hasSeenLanding', true);
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('hasSeenLanding', true);
 
                   Navigator.pushReplacementNamed(context, AppRoutes.home);
                 },

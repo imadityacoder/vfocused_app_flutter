@@ -48,14 +48,10 @@ class _LandingPageState extends State<LandingPage> {
     }
   }
 
-  void _skipToEnd() {
-    _controller.jumpToPage(_pages.length - 1);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.card,
       body: Stack(
         children: [
           PageView.builder(
@@ -83,27 +79,15 @@ class _LandingPageState extends State<LandingPage> {
                       activeDotColor: Colors.white,
                     ),
                   ),
-                  Row(
-                    children: [
-                      TextButton(
-                        onPressed: _skipToEnd,
-                        child: const Text(
-                          "SKIP",
-                          style: TextStyle(color: Colors.white70),
-                        ),
+                  ElevatedButton(
+                    onPressed: _nextPage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.button,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      const SizedBox(width: 8),
-                      ElevatedButton(
-                        onPressed: _nextPage,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.button,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: const Text("NEXT"),
-                      ),
-                    ],
+                    ),
+                    child: const Text("NEXT"),
                   ),
                 ],
               ),
