@@ -31,7 +31,7 @@ dev_dependencies:
   # isar_generator: ^3.1.0+1
   # build_runner: ^2.4.13
 
-  # flutter_launcher_icons: "^0.14.4"
+  flutter_launcher_icons: "^0.14.4"
 
 flutter:
   uses-material-design: true
@@ -62,8 +62,4 @@ flutter:
           weight: 600
 
 
-# flutter_launcher_icons:
-#   android: true
-#   ios: false
-#   image_path: "assets/images/logo.png" 
   

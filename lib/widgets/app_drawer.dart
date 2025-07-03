@@ -25,10 +25,10 @@ class AppDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/images/logo.png', height: 24),
+                      Image.asset('assets/images/logo.png', height: 26),
                       Text(
                         'Focused',
                         textAlign: TextAlign.center,

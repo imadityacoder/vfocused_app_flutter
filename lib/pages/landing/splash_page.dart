@@ -22,14 +22,16 @@ class _SplashPageState extends State<SplashPage> {
     final prefs = await SharedPreferences.getInstance();
     final hasSeenLanding = prefs.getBool('hasSeenLanding') ?? false;
 
-    if (hasSeenLanding) {
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const LandingPage()),
-      );
-    }
+    Future.delayed(Duration(milliseconds: 400), () {
+      if (!hasSeenLanding) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const LandingPage()),
+        );
+      } else {
+        Navigator.pushReplacementNamed(context, AppRoutes.home);
+      }
+    });
   }
 
   @override
@@ -38,8 +40,8 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: AppColors.card,
       body: Center(
         child: SizedBox(
-          height: 80,
-          width: 80,
+          height: 140,
+          width: 140,
           child: Image.asset('assets/images/logo.png'),
         ),
       ),
