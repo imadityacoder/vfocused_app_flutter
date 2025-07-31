@@ -1,4 +1,4 @@
-package com.example.vfocused_app
+package com.aditya.vfocused
 
 import io.flutter.embedding.android.FlutterActivity
 
