@@ -3,86 +3,91 @@
 **Effective Date:** October 16, 2025  
 **Last Updated:** October 16, 2025  
 
-Welcome to **V_Focused** (the "App"), developed by **Aditya Kumar** ("we," "our," or "us").  
-Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use our app.
+Welcome to **V_Focused** (“we,” “our,” or “us”), developed by **Aditya Kumar**.  
+Your privacy is extremely important to us — especially for children and younger users.  
+This Privacy Policy explains how we handle your information in compliance with **COPPA** and **Google Play Families Policy**.
 
 ---
 
 ## 1. Information We Collect
 
-### a. Information You Provide
-- **Account Information:** When you create an account, we may collect your name, email address, and profile details.
-- **Focus Data:** The app stores your focus sessions, streaks, and timer settings locally on your device.
-- **Feedback/Support:** If you contact us for help, we may receive your email and message content.
+### a. Information from All Users
+- **Basic Usage Data:** Anonymous analytics such as total focus time and session counts.  
+- **Device Data:** Non-personal info like app version, OS type, and crash reports.
 
-### b. Automatically Collected Information
-- **Device Information:** We may collect data like your device type, OS version, and unique identifiers (non-personal).
-- **Usage Data:** Anonymous data about how you use the app (e.g., time spent on focus sessions) may be collected to improve features.
+### b. Information from Children
+Our app **does not knowingly collect, use, or share personal information** from children under 13.  
+If we discover that we have unintentionally collected such data, we will delete it immediately.
 
 ### c. Local Storage
-Most user data (focus history, preferences, etc.) is stored locally on your device using secure local databases (like Isar).  
-We **do not** automatically upload or share this data to any external server.
+User preferences, focus records, and app settings are saved **only on the device** using local secure storage (Isar).  
+This data is **never uploaded to external servers**.
 
 ---
 
-## 2. How We Use Your Information
-We use collected information to:
-- Provide, maintain, and improve the app experience.
-- Analyze anonymized usage trends to improve performance.
-- Respond to user feedback and support requests.
-- Ensure a smooth and bug-free experience.
+## 2. How We Use Data
+We use minimal, anonymous data solely to:
+- Maintain and improve app performance.
+- Fix crashes and bugs.
+- Enhance user experience for focus and productivity tracking.
+
+We **do not** use data for advertising or profiling.
 
 ---
 
-## 3. Data Sharing and Disclosure
-We **do not sell, rent, or trade** your personal data.  
-Your information is only shared when:
-- Required by law or legal process.
-- Necessary to prevent fraud or protect user safety.
+## 3. Data Sharing
+We **do not sell, rent, or share** any personal data with third parties.  
+We only share non-personal, aggregated analytics to improve the app.
 
 ---
 
-## 4. Data Security
-We use modern security practices to protect your data from unauthorized access or disclosure.  
-However, no digital platform can guarantee 100% security, so we encourage you to protect your personal information.
+## 4. Third-Party Services
+V_Focused may use trusted third-party tools such as:
+- **Firebase Crashlytics** (for crash reporting)
+- **Firebase Analytics** (if enabled, anonymized only)
+
+All these services comply with **COPPA** and **Google Play Families Policy**.  
+You can read Google’s policy here:  
+[https://policies.google.com/privacy](https://policies.google.com/privacy)
 
 ---
 
-## 5. Children’s Privacy
-V_Focused is not intended for children under **13 years of age**.  
-We do not knowingly collect personal data from children. If we learn that we have unintentionally collected such data, we will delete it immediately.
+## 5. Data Security
+We use modern security standards to protect all user data stored locally.  
+No online personal data storage or account linking is performed.
 
 ---
 
-## 6. Your Rights
-You have the right to:
-- Access and modify your personal data.
-- Delete your account and associated local data at any time.
-- Withdraw consent by uninstalling the app.
+## 6. Children’s Privacy (Under Age 13)
+We take special care for children’s privacy:
+- We **do not collect** personal identifiers like names, emails, or photos.  
+- We **do not show ads** or personalized recommendations.  
+- Parents can delete all app data anytime by uninstalling the app.  
+
+If you are a parent or guardian and believe your child has provided personal data, please contact us so we can remove it immediately.
 
 ---
 
-## 7. Third-Party Services
-V_Focused may use third-party services such as:
-- **Firebase (Google):** for authentication or analytics (if applicable).
-Each third-party service has its own privacy policy. Please refer to their respective pages for details.
+## 7. Your Rights
+You may:
+- Delete all local data anytime by clearing the app’s storage or uninstalling it.
+- Contact us for any privacy concerns.
 
 ---
 
-## 8. Changes to This Policy
-We may update this Privacy Policy occasionally.  
-Updates will be reflected by the "Last Updated" date above.  
-We recommend reviewing it periodically to stay informed.
+## 8. Updates to This Policy
+We may update this Privacy Policy from time to time.  
+The “Last Updated” date above will reflect the most recent changes.
 
 ---
 
 ## 9. Contact Us
-If you have questions or concerns about this Privacy Policy, please contact us at:
+If you have any questions or concerns about our Privacy Policy, please reach out at:
 
-**Email:** [your-email@example.com]  
 **Developer:** Aditya Kumar  
-**App Name:** V_Focused  
+**Email:** iamadityafreelancer@gmail.com  
+**App:** V_Focused  
 
 ---
 
-**By using V_Focused, you agree to this Privacy Policy.**
+**By using V_Focused, you confirm that you have read and agreed to this Privacy Policy.**
