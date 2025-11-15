@@ -4,9 +4,12 @@ import 'package:vfocused_app/routes/app_routes.dart';
 import 'package:vfocused_app/services/notification_service.dart';
 import 'core/theme.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize notifications
   await initializeNotifications();
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
