@@ -116,9 +116,10 @@ class _FullscreenPomodoroClockState
               alignment: Alignment.center,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SizedBox(height: 24),
                     Text(
                       sessionLabel,
                       style: const TextStyle(
@@ -128,11 +129,12 @@ class _FullscreenPomodoroClockState
                         letterSpacing: 1.5,
                       ),
                     ),
+                    SizedBox(height: 16),
                     Text(
                       timeRemaining,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height * 0.75,
+                        fontSize: MediaQuery.of(context).size.height * 0.7,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         height: 0.95,
@@ -280,7 +282,7 @@ class _OverlayControlsState extends State<OverlayControls>
                     color: AppColors.neonBlue,
                   ),
                   onPressed: () {
-                    // fade out and then remove + close route
+                    Navigator.pop(context);
                     _fadeOut(close: true);
                   },
                 ),

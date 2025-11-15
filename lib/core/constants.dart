@@ -5,9 +5,9 @@ class AppColors {
   static const Color background = Color.fromARGB(255, 1, 9, 24);
   static const Color card = Color.fromARGB(
     255,
-    9,
-    0,
-    19,
+    17,
+    1,
+    36,
   ); // Slightly lighter for cards
 
   // Neon Accents
