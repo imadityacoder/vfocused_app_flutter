@@ -107,10 +107,10 @@ The AI agent:
 
 ## 📸 Screenshots
 
-| Screen 1                   | Screen 2                   | Screen 3                   | Screen 4                   |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| ![](assets/screens/1.jpeg) | ![](assets/screens/2.jpeg) | ![](assets/screens/3.jpeg) | ![](assets/screens/4.jpeg) |
+| Screen 1                | Screen 2                | Screen 3                | Screen 4                |
+| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
+| ![](screenshots/1.jpeg) | ![](screenshots/2.jpeg) | ![](screenshots/3.jpeg) | ![](screenshots/4.jpeg) |
 
-| Screen 5                   | Screen 6                   | Screen 7                   | Screen 8                   |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| ![](assets/screens/5.jpeg) | ![](assets/screens/6.jpeg) | ![](assets/screens/7.jpeg) | ![](assets/screens/8.jpeg) |
+| Screen 5                | Screen 6                | Screen 7                | Screen 8                |
+| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
+| ![](screenshots/5.jpeg) | ![](screenshots/6.jpeg) | ![](screenshots/7.jpeg) | ![](screenshots/8.jpeg) |
