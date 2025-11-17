@@ -1,3 +1,5 @@
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+
 # 🚀 **VFocused: Your AI-Powered Focus Aid**
 
 A productivity app with a **neon cyberpunk theme** that makes focusing _effortless_ instead of stressful.  
@@ -21,16 +23,12 @@ It offers daily reviews, personalized focus suggestions, and intelligent cycle t
 - AI analyzes your sessions and recommends improvements
 - Optional: Users can add their own API key for _maximum_ AI performance
 
----
-
 ## ⏱️ **Intelligent Pomodoro Timer**
 
 - Fully customizable focus + break durations
 - Neon-themed circular slider
 - Tracks focus sessions automatically
 - Auto-cycle flow (Focus → Short Break → Long Break)
-
----
 
 ## 📊 **Advanced Productivity Data**
 
@@ -39,15 +37,11 @@ It offers daily reviews, personalized focus suggestions, and intelligent cycle t
 - Clean visual graphs powered by **fl_chart**
 - All data stored locally with **Riverpod + Isar**
 
----
-
 ## 🧠 **AI Daily Review Card**
 
 - AI summarizes your daily productivity
 - Highlights strengths + areas to improve
 - Auto-updates every time the app launches
-
----
 
 ## 🎨 **Modern UI/UX**
 
@@ -56,8 +50,6 @@ It offers daily reviews, personalized focus suggestions, and intelligent cycle t
 - Minimal onboarding with aesthetic visuals
 - Custom icons
 - Maintains a sharp, Gen-Z-inspired vibe throughout
-
----
 
 # 🛠️ **Tech Stack**
 
@@ -76,8 +68,6 @@ It offers daily reviews, personalized focus suggestions, and intelligent cycle t
 - OpenAI Chat Completions API
 - Custom system prompts
 - Local user API key storage
-
----
 
 # ⚙️ **How It Works**
 
@@ -103,8 +93,6 @@ The AI agent:
 
 - Displays weekly focus data with clean, interactive charts
 
----
-
 ## 📸 Screenshots
 
 | Screen 1                | Screen 2                | Screen 3                | Screen 4                |
@@ -114,3 +102,25 @@ The AI agent:
 | Screen 5                | Screen 6                | Screen 7                | Screen 8                |
 | ----------------------- | ----------------------- | ----------------------- | ----------------------- |
 | ![](screenshots/5.jpeg) | ![](screenshots/6.jpeg) | ![](screenshots/7.jpeg) | ![](screenshots/8.jpeg) |
+
+## 🌱 Future Improvements
+
+- 🔁 **Smart Habit Tracking** — detect patterns in your daily routine automatically
+- 🧠 **Long-term AI Coaching** — an adaptive coach that learns your behavior over weeks
+- ☁️ **Cloud Sync** — access your focus stats across all devices
+- 💻 **Web App Version** — full browser support for cross-platform productivity
+- 🔥 **Gamified Focus Streaks** — earn levels, badges, and XP for consistent focus
+
+## 📌 About the Project
+
+VFocused was built with one goal:  
+to make focus **enjoyable**, **futuristic**, and **frictionless**.
+
+It was created for the **Start Developer Competition Hackathon**, showcasing a blend of AI assistance, clean UI, and productivity science.
+
+## 👨‍💻 Developer
+
+**Aditya** — a student and Flutter developer passionate about building apps that merge  
+practical functionality with sleek, modern UI vibes.
+
+Always exploring new ideas, blending tech with creativity, and pushing what a solo dev can build. 🚀
