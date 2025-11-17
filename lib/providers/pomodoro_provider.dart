@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vfocused_app/services/notification_service.dart';
 import 'package:vfocused_app/services/sound_service.dart';
 
@@ -11,6 +12,9 @@ class PomodoroState {
   final PomodoroSession session;
   final Duration focusDuration;
   final int completedCycles;
+  final int shortBreaks;
+  final int longBreaks;
+  final int focusedToday;
 
   PomodoroState({
     required this.remaining,
@@ -18,6 +22,9 @@ class PomodoroState {
     required this.session,
     required this.focusDuration,
     required this.completedCycles,
+    required this.shortBreaks,
+    required this.longBreaks,
+    required this.focusedToday,
   });
 
   PomodoroState copyWith({
@@ -26,6 +33,9 @@ class PomodoroState {
     PomodoroSession? session,
     Duration? focusDuration,
     int? completedCycles,
+    int? shortBreaks,
+    int? longBreaks,
+    int? focusedToday,
   }) {
     return PomodoroState(
       remaining: remaining ?? this.remaining,
@@ -33,6 +43,9 @@ class PomodoroState {
       session: session ?? this.session,
       focusDuration: focusDuration ?? this.focusDuration,
       completedCycles: completedCycles ?? this.completedCycles,
+      shortBreaks: shortBreaks ?? this.shortBreaks,
+      longBreaks: longBreaks ?? this.longBreaks,
+      focusedToday: focusedToday ?? this.focusedToday,
     );
   }
 }
@@ -49,11 +62,53 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
           session: PomodoroSession.focus,
           focusDuration: const Duration(minutes: 25),
           completedCycles: 0,
+          shortBreaks: 0,
+          longBreaks: 0,
+          focusedToday: 0,
         ),
-      );
+      ) {
+    _loadData();
+  }
 
   Timer? _timer;
-  int _lastCompletedCycle = 0;
+  final int _lastCompletedCycle = 0;
+
+  // --------------------------
+  // LOAD & SAVE FUNCTIONS
+  // --------------------------
+  Future<void> _loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final today = DateTime.now().day;
+    final savedDay = prefs.getInt("saved_day") ?? today;
+
+    if (savedDay != today) {
+      // new day → reset all counters
+      await prefs.clear();
+      await prefs.setInt("saved_day", today);
+      return;
+    }
+
+    state = state.copyWith(
+      completedCycles: prefs.getInt("completedCycles") ?? 0,
+      shortBreaks: prefs.getInt("shortBreaks") ?? 0,
+      longBreaks: prefs.getInt("longBreaks") ?? 0,
+      focusedToday: prefs.getInt("focusedToday") ?? 0,
+    );
+  }
+
+  Future<void> _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt("completedCycles", state.completedCycles);
+    await prefs.setInt("shortBreaks", state.shortBreaks);
+    await prefs.setInt("longBreaks", state.longBreaks);
+    await prefs.setInt("focusedToday", state.focusedToday);
+    await prefs.setInt("saved_day", DateTime.now().day);
+  }
+
+  // --------------------------
+  // POMODORO LOGIC
+  // --------------------------
 
   void start() {
     _timer?.cancel();
@@ -64,16 +119,16 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       if (state.remaining.inSeconds <= 1) {
         timer.cancel();
-        await cancelPomodoroNotification(); // stop progress bar
+        await cancelPomodoroNotification();
         _nextSession();
       } else {
-        final newRemaining = state.remaining - const Duration(seconds: 1);
-
-        state = state.copyWith(remaining: newRemaining);
+        state = state.copyWith(
+          remaining: state.remaining - const Duration(seconds: 1),
+        );
 
         await showPomodoroProgressNotification(
           sessionLabel: _sessionLabel(state.session),
-          remaining: newRemaining,
+          remaining: state.remaining,
           total: totalDuration,
         );
       }
@@ -110,43 +165,65 @@ class PomodoroNotifier extends StateNotifier<PomodoroState> {
     }
   }
 
+  // --------------------------
+  // STATE TRANSITIONS
+  // --------------------------
+
   void _nextSession() async {
     switch (state.session) {
+      // --------------------------
+      // FOCUS → BREAK
+      // --------------------------
       case PomodoroSession.focus:
-        int newCycles = state.completedCycles + 1;
+        final newCycles = state.completedCycles + 1;
+
         SoundService.playCycleCompleteSound();
         await showSessionDoneNotification("Time for a break!");
 
-        // play sound on cycle complete
-        if (newCycles > _lastCompletedCycle) {
-          _lastCompletedCycle = newCycles;
-        }
+        final isLongBreak = newCycles % 4 == 0;
 
-        bool isLongBreak = newCycles % 4 == 0;
+        final addedMinutes = state.focusDuration.inMinutes;
 
         state = state.copyWith(
+          completedCycles: newCycles,
+          focusedToday: state.focusedToday + addedMinutes,
           session:
               isLongBreak
                   ? PomodoroSession.longBreak
                   : PomodoroSession.shortBreak,
-          remaining:
-              isLongBreak
-                  ? const Duration(minutes: longBreakDuration)
-                  : const Duration(minutes: shortBreakDuration),
+          remaining: Duration(
+            minutes: isLongBreak ? longBreakDuration : shortBreakDuration,
+          ),
           isRunning: false,
-          completedCycles: newCycles,
         );
+        await _saveData();
         break;
 
+      // --------------------------
+      // BREAK → FOCUS
+      // --------------------------
       case PomodoroSession.shortBreak:
-      case PomodoroSession.longBreak:
         state = state.copyWith(
+          shortBreaks: state.shortBreaks + 1,
           session: PomodoroSession.focus,
           remaining: state.focusDuration,
           isRunning: false,
         );
         SoundService.playCycleBreakSound();
         await showSessionDoneNotification("Back to Focus!");
+        await _saveData();
+        break;
+
+      case PomodoroSession.longBreak:
+        state = state.copyWith(
+          longBreaks: state.longBreaks + 1,
+          session: PomodoroSession.focus,
+          remaining: state.focusDuration,
+          isRunning: false,
+        );
+        SoundService.playCycleBreakSound();
+        await showSessionDoneNotification("Back to Focus!");
+        await _saveData();
         break;
     }
   }
@@ -162,14 +239,9 @@ final pomodoroProvider = StateNotifierProvider<PomodoroNotifier, PomodoroState>(
   (ref) => PomodoroNotifier(),
 );
 
+// Expose focusedToday cleanly
 final focusedTodayProvider = Provider<int>((ref) {
-  final state = ref.watch(pomodoroProvider);
-
-  // Calculate total focused minutes from completed cycles
-  final totalFocusedMinutes =
-      state.completedCycles * state.focusDuration.inMinutes;
-
-  return totalFocusedMinutes;
+  return ref.watch(pomodoroProvider).focusedToday;
 });
 
 String _sessionLabel(PomodoroSession session) {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vfocused_app/core/constants.dart';
+import 'package:vfocused_app/providers/statistics_provider.dart';
 
-class SummaryRow extends StatelessWidget {
+class SummaryRow extends ConsumerWidget {
   const SummaryRow({super.key});
 
   Widget _item(String label, String value, IconData icon) {
@@ -32,13 +34,17 @@ class SummaryRow extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final stats = ref.watch(dailyStatsProvider);
+
+    final totalBreakMinutes = (stats.shortBreaks * 5) + (stats.longBreaks * 15);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _item("Total Focus", "128m", Icons.access_time),
-        _item("Sessions", "14", Icons.timer_outlined),
-        _item("Break", "32m", Icons.coffee),
+        _item("Total Focus", "${stats.focusedMinutes}m", Icons.access_time),
+        _item("Sessions", "${stats.completedCycles}", Icons.timer_outlined),
+        _item("Break", "${totalBreakMinutes}m", Icons.coffee),
       ],
     );
   }

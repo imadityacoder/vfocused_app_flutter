@@ -48,7 +48,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
             children: [
               SummaryRow(), // ❌ removed const
 
-              const SizedBox(height: 18),
+              const SizedBox(height: 24),
               const Text(
                 "This Week",
                 style: TextStyle(
@@ -85,11 +85,11 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
               ComparisonSection(), // ❌ no const
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
               const Text(
                 "A.I. Insights Report",

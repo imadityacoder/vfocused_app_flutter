@@ -19,22 +19,28 @@ class _LandingPageState extends State<LandingPage> {
       imagePath: 'assets/images/landing_img1.png',
       title: 'Welcome to \nVFocused App',
       subtitle:
-          'Minutes count, make every one lit. Focus, pause, repeat — success unlocked.',
+          'Dial in your focus. Neon vibes + zero distractions = peak productivity.',
     ),
+
     LandingItem(
       imagePath: 'assets/images/landing_img2.png',
-      title: 'Stay Sharp',
-      subtitle: 'Track your focus streaks with our neon-tuned timer.',
+      title: 'AI-Powered Insights',
+      subtitle:
+          'Your personal AI agent tracks patterns, predicts your peak hours, and boosts your workflow.',
     ),
+
     LandingItem(
       imagePath: 'assets/images/landing_img3.png',
-      title: 'Custom Cycles',
-      subtitle: 'Set your own focus-break vibes. No cap.',
+      title: 'Smart Cycles',
+      subtitle:
+          'Focus + break cycles auto-tuned by AI to match your grind. No more guesswork.',
     ),
+
     LandingItem(
       imagePath: 'assets/images/landing_img4.png',
-      title: 'Get Started',
-      subtitle: 'Your journey to productivity begins now.',
+      title: 'Your AI Companion Awaits',
+      subtitle:
+          'Ask anything. Get productivity tips, focus reports and routines — all powered by your AI agent.',
       showButton: true,
     ),
   ];
