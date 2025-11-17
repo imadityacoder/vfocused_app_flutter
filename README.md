@@ -5,14 +5,10 @@
 A productivity app with a **neon cyberpunk theme** that makes focusing _effortless_ instead of stressful.  
 VFocused blends **AI intelligence**, **Pomodoro science**, and a **clean modern Flutter UI** to help users build deep focus habits, monitor progress, and unlock personalized productivity insights.
 
----
-
 ## 🌟 **Why VFocused?**
 
 In a world packed with distractions, VFocused becomes your own **AI-powered productivity partner**.  
 It offers daily reviews, personalized focus suggestions, and intelligent cycle tuning — all inside a sleek, futuristic UI.
-
----
 
 # 🔥 **Essential Features**
 
