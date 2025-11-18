@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vfocused_app/pages/helpfeedback/help_feedback_page.dart';
 import 'package:vfocused_app/pages/home/home_page.dart';
 import 'package:vfocused_app/pages/landing/landing_page.dart';
 import 'package:vfocused_app/pages/landing/splash_page.dart';
@@ -29,9 +30,9 @@ class AppRoutes {
       case settings:
         return MaterialPageRoute(builder: (_) => const SettingsPage());
       case statistics:
-        return MaterialPageRoute(builder: (_) => const SettingsPage());
-      case helpFeedback:
         return MaterialPageRoute(builder: (_) => const StatisticsPage());
+      case helpFeedback:
+        return MaterialPageRoute(builder: (_) => const HelpFeedbackPage());
       case fullscreenTimer:
         return MaterialPageRoute(
           builder: (_) => const FullscreenPomodoroClock(),

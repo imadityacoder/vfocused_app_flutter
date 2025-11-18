@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vfocused_app/core/constants.dart';
 import 'package:vfocused_app/routes/app_routes.dart';
+import 'package:vfocused_app/widgets/api_key_dialog.dart';
 
 class LandingItem extends StatelessWidget {
   final String imagePath;
@@ -63,6 +64,9 @@ class LandingItem extends StatelessWidget {
                   await prefs.setBool('hasSeenLanding', true);
 
                   Navigator.pushReplacementNamed(context, AppRoutes.home);
+                  Future.microtask(() {
+                    showApiKeyDialog(context);
+                  });
                 },
                 style: ButtonStyle(
                   shape: WidgetStatePropertyAll(

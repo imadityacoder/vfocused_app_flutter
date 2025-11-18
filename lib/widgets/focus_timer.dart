@@ -39,18 +39,27 @@ class FocusTimer extends ConsumerWidget {
           alignment: Alignment.center,
           children: [
             SizedBox(
-              width: 300,
-              height: 300,
+              width: 310,
+              height: 310,
               child: CircularProgressIndicator(
-                value: progress,
-                strokeWidth: 20,
                 year2023: false,
-                backgroundColor: Colors.grey.shade900,
-                valueColor: const AlwaysStoppedAnimation(AppColors.neonGreen),
+                value: progress,
+                strokeWidth: 22,
+                backgroundColor:
+                    state.session != PomodoroSession.focus
+                        ? AppColors.neonPurple.withValues(alpha: 0.1)
+                        : AppColors.neonGreen.withValues(alpha: 0.1),
+                valueColor: AlwaysStoppedAnimation(
+                  state.isRunning && state.session == PomodoroSession.focus
+                      ? AppColors.neonGreen
+                      : state.session != PomodoroSession.focus
+                      ? AppColors.neonPurple
+                      : AppColors.neonGreen.withValues(alpha: 0.95),
+                ),
               ),
             ),
-            Positioned(
-              top: 70,
+            Align(
+              alignment: Alignment.center,
               child: SizedBox(
                 height: 160,
                 child: Column(
@@ -59,7 +68,8 @@ class FocusTimer extends ConsumerWidget {
                     Text(
                       sessionLabel.toUpperCase(),
                       style: const TextStyle(
-                        color: Colors.white70,
+                        color: Colors.white60,
+                        fontWeight: FontWeight.bold,
                         fontSize: 18,
                         letterSpacing: 1.2,
                       ),
@@ -68,7 +78,8 @@ class FocusTimer extends ConsumerWidget {
                     Text(
                       "Cycle: ${state.completedCycles}",
                       style: const TextStyle(
-                        color: Colors.white54,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white60,
                         fontSize: 14,
                       ),
                     ),
@@ -95,14 +106,14 @@ class FocusTimer extends ConsumerWidget {
                         child: SleekCircularSlider(
                           initialValue:
                               state.focusDuration.inMinutes.toDouble(),
-                          min: 5,
+                          min: 1,
                           max: 60,
                           onChange: (value) {
-                            final steppedValue = (value / 5).round() * 5;
+                            final steppedValue = value.round();
                             notifier.setFocusDuration(steppedValue);
                           },
                           innerWidget: (value) {
-                            final steppedValue = (value / 5).round() * 5;
+                            final steppedValue = value.round();
                             return Center(
                               child: Text(
                                 '$steppedValue min',
@@ -121,12 +132,14 @@ class FocusTimer extends ConsumerWidget {
                             customColors: CustomSliderColors(
                               dotColor: AppColors.neonBlue,
                               progressBarColor: AppColors.neonBlue,
-                              trackColor: Colors.grey.shade900,
+                              trackColor: AppColors.neonBlue.withValues(
+                                alpha: 0.1,
+                              ),
                             ),
                             customWidths: CustomSliderWidths(
                               progressBarWidth: 18,
                               trackWidth: 14,
-                              handlerSize: 16,
+                              handlerSize: 14,
                             ),
                           ),
                         ),
@@ -138,7 +151,7 @@ class FocusTimer extends ConsumerWidget {
                         child: Text(
                           formatTime(state.remaining),
                           style: const TextStyle(
-                            fontSize: 48,
+                            fontSize: 52,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -151,7 +164,7 @@ class FocusTimer extends ConsumerWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
+            FilledButton.icon(
               onPressed: () {
                 if (state.isRunning) {
                   notifier.pause();
@@ -159,39 +172,57 @@ class FocusTimer extends ConsumerWidget {
                   notifier.start();
                 }
               },
-              iconSize: 80,
-              splashRadius: 90,
+
+              label: Text(
+                state.isRunning ? 'Pause' : 'Start',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
               icon: Icon(
                 state.isRunning
-                    ? Icons.pause_circle_rounded
-                    : Icons.play_circle_fill_rounded,
-                color: AppColors.neonGreen,
+                    ? Icons.pause_rounded
+                    : Icons.play_arrow_rounded,
+                color:
+                    state.session != PomodoroSession.focus
+                        ? AppColors.neonPurple
+                        : AppColors.neonGreen,
+                size: 28,
+              ),
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 12,
+                ),
+                backgroundColor:
+                    state.session != PomodoroSession.focus
+                        ? AppColors.neonPurple.withValues(alpha: 0.2)
+                        : AppColors.neonGreen.withValues(alpha: 0.2),
               ),
             ),
-
-            state.isRunning
-                ? IconButton(
-                  iconSize: 40,
-                  splashRadius: 90,
-                  onPressed:
-                      () => Navigator.pushNamed(
-                        context,
-                        AppRoutes.fullscreenTimer,
-                      ),
-                  icon: const Icon(
-                    Icons.fullscreen_rounded,
-                    color: AppColors.neonBlue,
-                  ),
-                )
-                : IconButton(
-                  iconSize: 40,
-                  splashRadius: 90,
-                  onPressed: notifier.reset,
-                  icon: const Icon(
-                    Icons.replay_circle_filled_rounded,
-                    color: AppColors.neonBlue,
-                  ),
-                ),
+            const SizedBox(width: 16),
+            IconButton(
+              iconSize: 36,
+              splashRadius: 90,
+              onPressed: () {
+                if (state.isRunning) {
+                  Navigator.pushNamed(context, AppRoutes.fullscreenTimer);
+                } else {
+                  notifier.reset();
+                }
+              },
+              icon: Icon(
+                state.isRunning
+                    ? Icons.fullscreen_rounded
+                    : Icons.replay_rounded,
+                color: AppColors.neonBlue,
+              ),
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.neonBlue.withValues(alpha: 0.2),
+              ),
+            ),
           ],
         ),
       ],

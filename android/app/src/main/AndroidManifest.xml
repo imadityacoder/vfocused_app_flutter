@@ -1,6 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <application
         android:label="V Focused"
         android:name="${applicationName}"
@@ -36,6 +39,11 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="default_channel" />
+        <service
+    android:name="id.flutter.flutter_background_service.BackgroundService"
+    android:enabled="true"
+    android:exported="false"
+    tools:replace="android:exported" />
 
     </application>
     <!-- Required to query activities that can process text, see:
